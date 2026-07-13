@@ -43,6 +43,24 @@ sudo useradd -m splunk
 sudo -u splunk /opt/splunk/bin/splunk start --accept-license
 
 ### Log Sources
+
+[ Your Ubuntu OS ] Generates security event
+       │
+       ▼
+ Writes text line to ──> /var/log/auth.log
+                               │
+            (Splunk "Tailing" Process monitors this file)
+                               │
+                               ▼
+                    [ /opt/splunk/bin/splunk ] 
+            Reads the new line -> Parses it -> Stores it in index=main
+ 
+# Grant read permissions on the target log files to that group
+sudo chmod 640 /var/log/auth.log /var/log/ufw.log /var/log/syslog
+
+# Restart Splunk to apply the group changes
+sudo -u splunk /opt/splunk/bin/splunk restart        
+ 
 - /var/log/ufw.log
 - /var/log/auth.log
 - /var/log/syslog
