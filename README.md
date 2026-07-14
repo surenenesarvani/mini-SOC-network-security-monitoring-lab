@@ -44,16 +44,8 @@ sudo -u splunk /opt/splunk/bin/splunk start --accept-license
 
 ### Log Sources
 
-[ Your Ubuntu OS ] Generates security event
-       │
-       ▼
- Writes text line to ──> /var/log/auth.log
-                               │
-            (Splunk "Tailing" Process monitors this file)
-                               │
-                               ▼
-                    [ /opt/splunk/bin/splunk ] 
-            Reads the new line -> Parses it -> Stores it in index=main
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/68c0d625-234d-478c-b8a1-b2ab6678f1dd" />
+
  
 # Grant read permissions on the target log files to that group
 sudo chmod 640 /var/log/auth.log /var/log/ufw.log /var/log/syslog
